@@ -1,0 +1,26 @@
+#.bashrc for Alpine Docker
+
+alias cd..="cd .."
+alias ..="cd .."
+alias ...="cd ../../"
+alias cd-="cd -"
+alias back="cd -"
+alias cd--="cd --"
+alias dir="ls -la"
+alias dirs="dirs -v"
+alias p="pushd"
+alias po="popd"
+alias ll="ls -la --color=yes"
+alias lt="ll -lath"
+alias lth="ll -lath | head"
+alias kk="ll -lath"
+alias kh="ll -lath | head"
+
+
+#Set Multiline prompt
+export PS1='┌──\033[00;36m\]\t \[\033[01;35m\][\u@\h] \[\033[01;33m\][\w]\[\033[00m\]\n└────\[\033[0;32m\]█\[\033[00m\]'
+
+set -o vi
+# to be able to i-search in bash history with Ctrl-S
+set stty -ixon
+  

@@ -1,0 +1,166 @@
+	map <leader>v <c-q>
+	set nocompatible
+	set nocompatible              " be iMproved, required
+	filetype off                  " required
+
+	"Set color scheme
+		:color pablo
+	"Color overrides for Pablo
+		:highlight Comment ctermfg=6
+		:highlight Folded ctermfg=0
+		:highlight diffChange ctermfg=11
+	"Color overrides for Molokai_dark
+		:highlight diffText gui=bold
+		:highlight LineNr guifg=gray
+		:highlight Folded guibg=gray22 guifg=cyan
+	"Set status line color GUI
+		:highlight statusline gui=NONE guibg=Yellow guifg=black
+		:highlight statuslineNC gui=NONE guibg=gray guifg=black
+	"Set status line color CTERM
+		:highlight statusline ctermbg=black ctermfg=yellow
+		:highlight statuslineNC ctermbg=white ctermfg=blue
+		:highlight DiffText ctermfg=yellow
+	"Set status line content
+        set statusline=  
+        set statusline+=Buff[%.3n]\                  " buffer number  
+        set statusline+=%f\                          " filename   
+        set statusline+=%h%m%r%w                     " status flags  
+        set statusline+=\[%{strlen(&ft)?&ft:'none'}] " file type  
+		set statusline+=\[%{&fileencoding?&fileencoding:&encoding}]
+        set statusline+=%=                           " right align remainder  
+        "set statusline+=0x%-8B                       " character value  
+        set statusline+=%-12(%l,%c%V%)               " line, character  
+        set statusline+=%<%P                         " file position  
+	"Turns visual bell and beep off
+		set vb t_vb=
+	"Automatikusan ne szúrjon be sortörést -- eztet sajnos a source $VIMRUNTIME/vimrc_example.vim felülírja
+		set textwidth=0
+		set wrapmargin=0
+		set formatoptions-=t
+	"Sortörést állítja be (jobb oldalon nem megy ki margóig a szöveg)
+		set linebreak 
+	"Kicsit szellősebb sorokat állít be.
+		set linespace=5 
+	"Beállítja, hogy mindig max képernyőn nyíljon meg a VIM
+		"set lines=999 columns=999 
+	"Mindig mutasson státuszsort
+		set laststatus=2 
+	"Beállítja, a softtabok értékét 8-re
+		set shiftwidth=4
+		set tabstop=4
+	"Beállítja, hogy a tabok is a shiftwidth értéke szerint menjenek
+		set smarttab
+	"Automatikuisan behúzza a sorokat.
+		set autoindent 
+	"Mindidg legyen sorszámozás
+		set number 
+	"Relative line number
+		"set rnu 
+	" turns cursorline off when leaving windows/buffer
+		augroup CursorLine
+			au!
+			au VimEnter * setlocal cursorline
+			au WinEnter * setlocal cursorline
+			au BufWinEnter * setlocal cursorline
+			au WinLeave * setlocal nocursorline
+		augroup END
+	"14 space-t szúr be shobreak után
+		let &showbreak=repeat(' ', 14) 
+	" New split window on the right
+		set splitright
+	" New split window on the bottom
+		set splitbelow
+	" Scrollozásnál ennyi sort mindig mutat képernyő tetejéből-aljából-oldalából
+		set scrolloff=5
+		set sidescroll=1
+		set sidescrolloff=10
+	"ESC gomb átmappolása
+		imap ii <Esc>
+		imap jk <Esc>
+	"Accidental shift-W also saves
+		"noremap :W :w<cr>
+		:command W w
+	"Kurzormozgatás átmappolása
+		noremap j gj
+		noremap k gk
+		noremap gj j
+		noremap gk k
+	"Sor elejére és végére ugrás átmappingolása
+		noremap H ^
+		noremap L $
+	"Lefelé scrollozás CTRL-s gombra, mert Windowsban a CTRL-y foglalt a lefelé scrollozásra,
+		noremap <C-s> <C-y>
+	"Insert módban is lehessen sorok között mozogni
+		inoremap <C-j> <up>
+		inoremap <C-k> <down>
+	"Insert módban így egészíti ki
+		set completeopt=longest,menuone,preview
+	"Substitute kezdése egyszerűbben, automatikusan kieszképelve minden regexet
+		nnoremap <leader>s :%s,\v
+	"Keresés ne legyen betűérzékeny
+		set ignorecase 
+	"Ha csak kisbetűvel keresek, nem érzékeny, ha van benne nagybetű is, akkor igen.
+		set smartcase 
+	"Ha zárójelet nyitok, akkor egy pillanatra átugrik (a végére is), amikor bezártam
+		set showmatch 
+	"A keresési eredményeket már a keresés közben is mutatja a háttér kiemelésével
+		set hlsearch 
+	"Kiszedi a keresés kiemelését
+		noremap <leader><space> :noh<cr>:call clearmatches()<cr>
+	"Space-re keres előre, C-Space-re visszafelé, regexek very magicre állítva
+		"noremap <Space> /\v
+		"noremap <C-Space> ?\v
+	" Keep search matches in the middle of the window and pulse the line when moving to them.
+		nnoremap n nzzzv
+		nnoremap N Nzzzv
+	"map to search the visually selected text
+		vnoremap // y/<C-R>"<CR>
+	"Az új split mindig jobbra és lent nyíljon.
+		set splitright
+		set splitbelow
+	"Buffer kilistázás és belépés választás módba
+		nnoremap <f1> :ls<cr>:b 
+	"Alternatív (előzőleg megnyitott) buferre vált
+		nnoremap <F2> :b#<cr>
+	"Bufferek között vált F4-F3-ra
+		nnoremap <F4> :bnext <CR>
+		nnoremap <F3> :bprevious<CR>
+	"Minden nyitott buffert elment 
+		map <F5> :wa!<cr>
+	"Opens a new tab
+		map <F10> :tabnew<cr>
+	" Sets foldmethod to indent
+		nnoremap <leader>fi :set foldmethod=indent<cr>
+	" Sets foldmethod to manualj
+		nnoremap <leader>fm :set foldmethod=manual<cr>
+	" always show folds
+		set foldcolumn=1
+	" Display folds with one rows 
+		set foldminlines=0
+	"Ide rakja a backupot, .un file-t és swap file-t pedig ne csináljon
+		set nobackup
+		set noswapfile
+		"set noundofile
+	"Mentés nélkül is lehessen buffert váltani
+		set hidden 
+	"A mappaváltással a PWD is automatikusan változik
+		set autochdir
+		noremap <leader>cdoff :set noautochdir<cr>
+	"To display proper special characters in Airline status
+		set guifont=Consolas
+	"Az aktuális fájl mappátját állítja be PWD-nek
+	  	nnoremap <Leader>cd :cd %:h<bar>pwd<cr>
+	" Reload file if it's modified outside
+		set autoread
+		set autowrite
+	set textwidth=0
+	" Set the cursor shape and color for vim (not gvim)
+	if &term =~ "xterm\\|rxvt"
+	  " use an orange cursor in insert mode
+	  let &t_SI = "\<Esc>[3 q\<Esc>]12;orange\x7"
+	  " use a red cursor otherwise
+	  let &t_EI = "\<Esc>[0 q\<Esc>]12;red\x7"
+	  silent !echo -ne "\033]12;red\007"
+	  " reset cursor when vim exits
+	   autocmd VimLeave * silent !echo -ne "\033]112\007"
+	endif
