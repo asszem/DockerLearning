@@ -1,6 +1,6 @@
 FROM alpine
 
-COPY .bashrc-docker .bashrc
+COPY .bashrc-docker /root/.bashrc
 COPY .vimrc-docker /home/.vimrc
 
 RUN apk update && apk add --no-cache vim curl bash wget
