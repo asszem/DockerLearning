@@ -24,3 +24,25 @@ vendor/pkg/
 pyenv
 Vagrantfile
 node_modules/
+#####################################################
+###  gitignore  for java folder                   ###
+#####################################################
+/java/**/*.war
+/java/**/*.ear
+/java/**/*.zip
+/java/**/*.tar
+/java/**/*.tar.gz
+/java/**/*.rar
+ /java/**/*.class
+ /java/**/*.tmp
+ /java/**/*.bak
+ /java/**/*.swp
+ /java/**/*~.nib
+ /java/**/*.log
+
+ # IDEA specific git ignore
+ /java/**/**/.idea
+ /java/**/out/
+ *.trc
+ *.iml
+
